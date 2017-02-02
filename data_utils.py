@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.preprocessing import StandardScaler
 
 def load(filename, test=False, normalize=True):
     f = open(filename, 'rb')
@@ -10,13 +11,13 @@ def load(filename, test=False, normalize=True):
         X = data[:, 1:]
         # normalize
         if normalize:
-            X = (X - X.mean()) / (X.std())
+            X = StandardScaler().fit_transform(X)
         return X
     else:
         X,y = data[:, 1:-1], data[:, -1]
         # normalize
         if normalize:
-            X = (X - X.mean()) / (X.std())
+            X = StandardScaler().fit_transform(X)
         y = y.astype('int')
         return X,y
     
@@ -31,12 +32,12 @@ def load_test(filename, normalize=True):
     return X
 
 
-def write_test(filename, vals):
+def write_test(filename, preds):
     f = open(filename, 'w')
     
     f.write("Id,PES1\n")
-    for i in xrange(len(vals)):
-        f.write('%s,%d\n' %(str(i), int(vals[i])))
+    for i in xrange(len(preds)):
+        f.write('%s,%d\n' %(str(i), int(preds[i])))
     
     f.close()
 

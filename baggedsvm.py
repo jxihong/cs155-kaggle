@@ -6,6 +6,7 @@ from sklearn.model_selection import cross_val_score
 
 from data_utils import load_train, load_test, write_test
 
+# Can't use GridSearch because the SVC parameters are nested inside Bagging Classifier
 if __name__ == '__main__':
     X, y = load_train('data/train_2008.csv')
     
@@ -16,7 +17,7 @@ if __name__ == '__main__':
     best_model = None
     for p in zip(Cs, gammas):
         bagging = BaggingClassifier(SVC(C=p[0],cache_size=7000, kernel='rbf', gamma=p[1]), 
-                                    n_estimators=20, max_samples=0.1, max_features=0.1)
+                                    n_estimators=20, max_samples=0.1, max_features=0.5)
         scores = cross_val_score(bagging, X, y, scoring='accuracy', cv=3)        
         avg_score = scores.mean()
         
