@@ -3,6 +3,9 @@
 
 .ipynb_checkpoints/
 
+predictions/*.csv
+data/*.csv
+
 # Random Mac Temp Files
 *~
 *.DS_Store

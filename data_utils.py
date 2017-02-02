@@ -24,8 +24,18 @@ def load_test(filename):
     return X
 
 
+def write_test(filename, vals):
+    f = open(filename, 'w')
+    
+    f.write("Id,PES1\n")
+    for i in xrange(len(vals)):
+        f.write('%s,%d\n' %(str(i), int(vals[i])))
+    
+    f.close()
+
+
 if __name__=='__main__':
-    train = 'train_2008.csv'
+    train = './data/train_2008.csv'
     
     X, y = load_train(train)
     print 'X: ', X.shape
