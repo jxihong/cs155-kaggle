@@ -1,0 +1,11 @@
+# Python binaries
+*pyc
+
+.ipynb_checkpoints/
+
+# Random Mac Temp Files
+*~
+*.DS_Store
+
+# Data Files
+*.csv
