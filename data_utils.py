@@ -1,6 +1,6 @@
 import numpy as np
 
-def load(filename, test=False):
+def load(filename, test=False, normalize=True):
     f = open(filename, 'rb')
     data = np.loadtxt(f, dtype='float', delimiter=',', skiprows=1)
     f.close()
@@ -9,23 +9,25 @@ def load(filename, test=False):
         # ignore first column of ids
         X = data[:, 1:]
         # normalize
-        X = (X - X.mean()) / (X.std())
+        if normalize:
+            X = (X - X.mean()) / (X.std())
         return X
     else:
         X,y = data[:, 1:-1], data[:, -1]
         # normalize
-        X = (X - X.mean()) / (X.std())
+        if normalize:
+            X = (X - X.mean()) / (X.std())
         y = y.astype('int')
         return X,y
     
 
-def load_train(filename):
-    X, y = load(filename, False)
+def load_train(filename, normalize=True):
+    X, y = load(filename, False, normalize)
     return X, y
 
 
-def load_test(filename):
-    X = load(filename, True)
+def load_test(filename, normalize=True):
+    X = load(filename, True, normalize)
     return X
 
 
