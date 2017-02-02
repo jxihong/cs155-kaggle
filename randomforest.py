@@ -16,7 +16,8 @@ if __name__ == '__main__':
     }
 
     rfc = ens.RandomForestClassifier()
-    clf = GridSearchCV(estimator=rfc, scoring='accuracy', param_grid=param_grid, n_jobs=4, verbose=2)
+    clf = GridSearchCV(estimator=rfc, scoring='accuracy', param_grid=param_grid, 
+                       n_jobs=4, verbose=2)
     clf.fit(X, y)
 
     print('Best Error: %f' %(clf.best_score_))
