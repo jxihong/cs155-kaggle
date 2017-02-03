@@ -6,7 +6,7 @@ from sklearn.externals import joblib
 from data_utils import load_train, load_test, write_test
 
 if __name__ == '__main__':
-    X, y = load_train('data/train_2008.csv', False)
+    X, y = load_train('../data/train_2008.csv', False)
     
     param_grid = {
         'n_estimators': [20, 50, 100, 500, 1000],
@@ -21,13 +21,6 @@ if __name__ == '__main__':
     clf.fit(X, y)
 
     print('Best Error: %f' %(clf.best_score_))
-    
-    print 'Best Model:\n'
-    print clf.best_estimator_
-    
-    joblib.dump(clf.best_estimator_, 'models/randomforest.pkl') 
-    
-    X_test = load_test('data/test_2008.csv', False)
-    write_test('predictions/randomforest.csv', clf.best_estimator_.predict(X_test))
+    print('Best Model: %s' %(clf.best_params_))
     
     

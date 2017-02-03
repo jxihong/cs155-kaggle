@@ -6,15 +6,15 @@ from sklearn.model_selection import cross_val_score
 
 from data_utils import load_train, load_test, write_test
 
-# Can't use GridSearch because the SVC parameters are nested inside Bagging Classifier
+# Can't use GridSearchCV because the SVC parameters are nested inside Bagging Classifier
 if __name__ == '__main__':
-    X, y = load_train('data/train_2008.csv')
+    X, y = load_train('../data/train_2008.csv')
     
     Cs = np.logspace(-7, 2, 10)
     gammas = np.logspace(-6, 2, 9, base=2)
 
     best_score = 0
-    best_model = None
+    best_params = None
     for p in zip(Cs, gammas):
         bagging = BaggingClassifier(SVC(C=p[0],cache_size=7000, kernel='rbf', gamma=p[1]), 
                                     n_estimators=20, max_samples=0.1, max_features=0.5)
@@ -25,13 +25,8 @@ if __name__ == '__main__':
         
         if best_score <= avg_score:
             best_score = avg_score
-            best_model = bagging
+            best_params = p
 
     
     print('Best Error: %f' %(best_score))
-
-    joblib.dump(best_model, 'models/rbfsvm.pkl') 
-    
-    X_test = load_test('data/test_2008.csv')
-    write_test('predictions/rbfsvm.csv', best_model.predict(X_test))
-
+    print('Best Model: %s' %(p))
