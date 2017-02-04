@@ -1,9 +1,16 @@
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
+CONSTANT = (1, 2, 12, 14, 16, 47, 58, 129, 130, 131, 135, 136, 137, 254, 258)
+
 def load(filename, test=False, normalize=True):
+    if test:
+        cols = set(range(382)).difference(CONSTANT)
+    else:
+        cols = set(range(383)).difference(CONSTANT)
+
     f = open(filename, 'rb')
-    data = np.loadtxt(f, dtype='float', delimiter=',', skiprows=1)
+    data = np.loadtxt(f, dtype='float', delimiter=',', skiprows=1, usecols=cols)
     f.close()
     
     if test:

@@ -7,6 +7,7 @@ import sys, os
 sys.path.append(os.path.abspath('..'))
 
 from data_utils import load_train, load_test, write_test
+from report import *
 
 if __name__ == '__main__':
     X, y = load_train('../data/train_2008.csv')

@@ -7,12 +7,12 @@ import sys, os
 sys.path.append(os.path.abspath('..'))
 
 from data_utils import load_train, load_test, write_test
+from report import *
 
 if __name__ == '__main__':
     X, y = load_train('../data/train_2008.csv', False)
     
     param_grid = {
-        'n_estimators': [20, 50, 100, 500, 700, 1000],
         'criterion':  ['gini', 'entropy'],
         'max_features': [None, 'auto', 'sqrt', 'log2'],
         'max_depth': [2, 5, 10, 20]
