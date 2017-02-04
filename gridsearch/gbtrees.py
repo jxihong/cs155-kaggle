@@ -1,5 +1,8 @@
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
+
+from scipy.stats import randint as sp_rand
+
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.externals import joblib
 
@@ -8,24 +11,24 @@ sys.path.append(os.path.abspath('..'))
 
 from data_utils import load_train, load_test, write_test
 
-if __name__ == '__main__':
+if __name__=='__main__':
     X, y = load_train('../data/train_2008.csv', False)
+
+    gbm = GradientBoostingClassifier()
     
     param_grid = {
-        'n_estimators': [20, 50, 100, 500, 700, 1000],
-        'criterion':  ['gini', 'entropy'],
-        'max_features': [None, 'auto', 'sqrt', 'log2'],
-        'max_depth': [2, 5, 10, 20]
+        'learning_rate': [0.1],
+        'n_estimators':  [20, 50, 100, 200],
+        'max_depth': [2, 5, 10, 15],
+        'subsample': [0.8, 0.9],
+        'max_features': [20, 50, 100],
     }
-
-    rfc = RandomForestClassifier()
-    clf = GridSearchCV(estimator=rfc, scoring='accuracy', param_grid=param_grid, 
+    
+    clf = GridSearchCV(gbm, scoring='accuracy', param_grid=param_grid, 
                        n_jobs=4, verbose=2)
     clf.fit(X, y)
-
-    report(clf.cv_results_)
     
+    report(clf.cv_results_)
+   
     print('Best Error: %f' %(clf.best_score_))
     print('Best Model: %s' %(clf.best_params_))
-    
-    

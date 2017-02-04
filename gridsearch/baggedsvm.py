@@ -4,6 +4,9 @@ from sklearn.ensemble import BaggingClassifier
 from sklearn.externals import joblib
 from sklearn.model_selection import cross_val_score
 
+import sys, os
+sys.path.append(os.path.abspath('..'))
+
 from data_utils import load_train, load_test, write_test
 
 # Can't use GridSearchCV because the SVC parameters are nested inside Bagging Classifier

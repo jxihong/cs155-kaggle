@@ -3,6 +3,9 @@ from sklearn.svm import LinearSVC
 from sklearn.model_selection import GridSearchCV
 from sklearn.externals import joblib
 
+import sys, os
+sys.path.append(os.path.abspath('..'))
+
 from data_utils import load_train, load_test, write_test
 
 if __name__ == '__main__':
@@ -19,6 +22,8 @@ if __name__ == '__main__':
                        n_jobs=4, verbose=2)
     clf.fit(X, y)
 
+    
+    report(clf.cv_results_)
     
     print('Best Error: %f' %(clf.best_score_))
     print('Best Model: %s' %(clf.best_params_))
