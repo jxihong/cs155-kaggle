@@ -16,8 +16,10 @@ Save your models here. You can use "pickle" or sci-kit learn's "joblib" to dump 
 
 6. neuralnet - Neural Network with 2 layers w/ 50 nodes in 1st hidden and 10 nodes in 2nd hidden, and 0.0 Dropoug (0.745)
 
-7. gbtree - Gradient Boosted Tree with 200 estimators, and max depth of 5.
+7. gbtree - Gradient Boosted Tree with 200 estimators, and max depth of 5. (0.779)
 
-8. svm_kbest - SVM with rbf kernel, and feature classification to select the best 50 features. Used C=1.0 and gamma=0.165.
+8. svm_kbest - SVM with rbf kernel, and feature classification to select the best 50 features. Used C=1.0 and gamma=0.165. (0.771)
 
-9. logistic - Basic logistic regression, using C=0.001.
+9. logistic - Basic logistic regression, using C=0.001. (0.770)
+
+10. xgboost - Gradient Boosted Tree with XGBoost (faster to train) with 1000 estimators, and subsample=0.9, colsample_bytree=0.5, and max_depth=10.  (0.785)

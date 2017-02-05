@@ -1,7 +1,5 @@
 import numpy as np
 
-from scipy.stats import randint as sp_rand
-
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.externals import joblib
