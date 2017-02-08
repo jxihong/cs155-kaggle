@@ -12,3 +12,5 @@ data/*.csv
 
 # Data Files
 *.csv
+
+*pkl
